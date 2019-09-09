@@ -1,0 +1,17 @@
+{
+  "name": "scheduler-callback",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "log4js": "^5.1.0",
+    "node-scheduler": "^1.0.0",
+    "nodemon": "^1.19.2"
+  }
+}
