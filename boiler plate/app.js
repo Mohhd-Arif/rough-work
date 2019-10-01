@@ -10,7 +10,4 @@ app.use(bodyparser.json())
 
 app.use('/api/v1',router1);
 
-
-
-
 app.listen(8000,()=>logger.info("listening on port 8000"));

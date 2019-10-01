@@ -1,27 +1,31 @@
 // var csv = require('csv');
-const fs = require('fs')
-const json2csv = require('json2csv');
+const ObjectsToCsv = require('objects-to-csv');
 
 
-function saveToCSV(data){
-    var json = {
-        "car":[
-         {
-          "name":"Audi",
-          "price":"40000",
-          "color":"blue"
-         }
-        ]
-       };
-       
-       json2csv({data: json.car, fields: ['name', 'price', 'color']}, function(err, csv) {
-         if (err) console.log(err);
-         fs.writeFile('test.csv', csv, function(err) {
-           if (err) throw err;
-           console.log('cars file saved');
-         });
-       });
+function saveToCSV(data,bool=false){
+  if(bool){
+    (async () => {
+      const csv = new ObjectsToCsv(data);
+     
+      // Save to file:
+      await csv.toDisk('./api/v1/main.csv',{append:true});
+     
+      // Return the CSV file as string:
+      // console.log(await csv.toString());
+    })();
 
+  }
+else{
+  (async () => {
+    const csv = new ObjectsToCsv(data);
+   
+    // Save to file:
+    await csv.toDisk('./api/v1/test.csv');
+   
+    // Return the CSV file as string:
+    // console.log(await csv.toString());
+  })();
+}
 
 }
 // saveToCSV();
