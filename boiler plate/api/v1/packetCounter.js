@@ -1,4 +1,4 @@
-let saveToCSV = require('./csv1')
+var saveToCSV = require('./csv1')
 const csv=require('csvtojson')
 var path = require('path');
 
@@ -40,10 +40,10 @@ let packetCounter = async function (req, res, next) {
             }
         })
         .catch(message=>console.log(message));
-        
+
     }
     let currentDate= new Date()//date to compare
-    
+
     if(packetManager.date.getDate() <currentDate.getDate() || packetManager.date.getMonth()<currentDate.getMonth()){
         // packetManagerData.push(packetManager);
         console.log("dumping=============")
@@ -56,7 +56,7 @@ let packetCounter = async function (req, res, next) {
             updateLocHit:0,
             trackerList:{}
         }
-        
+
     }
 
         ++packetManager.totalApiHit;
@@ -72,14 +72,38 @@ let packetCounter = async function (req, res, next) {
                 UUID = req.query.UUID;
             }
             packetManager.trackerList[UUID] = (packetManager.trackerList.hasOwnProperty(UUID)) ? ++packetManager.trackerList[UUID]: 1;
-        
+
         }
 
     console.log(packetManager,"packet MANAGER")
     console.log(packetManagerData,"packetmanager data")
     // delete packetManager.trackerList;
     // delete packetManager.date;
-    saveToCSV([packetManager])
-    res.send('200');
+    saveToCSV([packetManager]);
+    next();
+    // res.send('200');
 }
+
+// var arif;
+// if (x=1)
+//     console.log("hello")
+//
+// switch(foo) {
+//     case 1:
+//         doSomething();
+//     case 2:
+//         doSomething();
+//     }
+//
+// var a = 10;
+// a=a;
+// console.log("\'")
+//
+// var fun = function(){
+//     console.log("hello");
+//      console.log("world");
+//
+// }
+
+// fun();
 module.exports = packetCounter;
